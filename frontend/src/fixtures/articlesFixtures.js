@@ -4,7 +4,7 @@ const articlesFixtures = {
     title: "article1",
     url: "howmuchmilk.com",
     explanation: "people need to know",
-    email: "milkman@gmail.com"
+    email: "milkman@gmail.com",
     dateAdded: "2022-01-02T12:00:00",
   },
   threeArticles: [
