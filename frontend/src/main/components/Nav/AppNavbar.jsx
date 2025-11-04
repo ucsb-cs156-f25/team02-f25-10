@@ -78,7 +78,7 @@ export default function AppNavbar({
               {hasRole(currentUser, "ROLE_USER") && (
                 <>
                   <Nav.Link as={Link} to="/helprequest">
-                    HelpRequest
+                    Help Request
                   </Nav.Link>
                 </>
               )}
