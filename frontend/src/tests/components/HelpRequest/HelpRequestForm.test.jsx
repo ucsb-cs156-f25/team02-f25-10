@@ -19,32 +19,30 @@ describe("HelpRequestForm tests", () => {
     render(
       <Router>
         <HelpRequestForm />
-      </Router>
+      </Router>,
     );
 
     await screen.findByTestId("HelpRequestForm-requesterEmail");
 
-    expect(
-      screen.queryByTestId("HelpRequestForm-id")
-    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId("HelpRequestForm-id")).not.toBeInTheDocument();
 
     expect(
-      screen.getByTestId("HelpRequestForm-requesterEmail")
+      screen.getByTestId("HelpRequestForm-requesterEmail"),
     ).toBeInTheDocument();
     expect(screen.getByTestId("HelpRequestForm-teamId")).toBeInTheDocument();
     expect(
-      screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom")
+      screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom"),
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("HelpRequestForm-requestTime")
+      screen.getByTestId("HelpRequestForm-requestTime"),
     ).toBeInTheDocument();
     expect(
-      screen.getByTestId("HelpRequestForm-explanation")
+      screen.getByTestId("HelpRequestForm-explanation"),
     ).toBeInTheDocument();
     expect(screen.getByTestId("HelpRequestForm-solved")).toBeInTheDocument();
 
     expect(screen.getByTestId("HelpRequestForm-submit")).toHaveTextContent(
-      "Create"
+      "Create",
     );
   });
 
@@ -58,7 +56,7 @@ describe("HelpRequestForm tests", () => {
           buttonLabel="Update"
           submitAction={vi.fn()}
         />
-      </Router>
+      </Router>,
     );
 
     const idField = await screen.findByTestId("HelpRequestForm-id");
@@ -67,7 +65,7 @@ describe("HelpRequestForm tests", () => {
     expect(idField).toBeDisabled();
 
     expect(screen.getByTestId("HelpRequestForm-submit")).toHaveTextContent(
-      "Update"
+      "Update",
     );
   });
 
@@ -75,29 +73,25 @@ describe("HelpRequestForm tests", () => {
     render(
       <Router>
         <HelpRequestForm submitAction={vi.fn()} />
-      </Router>
+      </Router>,
     );
 
-    const submitButton = await screen.findByTestId(
-      "HelpRequestForm-submit"
-    );
+    const submitButton = await screen.findByTestId("HelpRequestForm-submit");
 
     fireEvent.click(submitButton);
 
     await screen.findByText(/Requester email is required\./i);
     expect(
-      screen.getByText(/Requester email is required\./i)
+      screen.getByText(/Requester email is required\./i),
     ).toBeInTheDocument();
     expect(screen.getByText(/Team id is required\./i)).toBeInTheDocument();
     expect(
-      screen.getByText(/Table or breakout room is required\./i)
+      screen.getByText(/Table or breakout room is required\./i),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Request time is required and must be in ISO format\./i)
+      screen.getByText(/Request time is required and must be in ISO format\./i),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Explanation is required\./i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Explanation is required\./i)).toBeInTheDocument();
   });
 
   //
@@ -108,11 +102,11 @@ describe("HelpRequestForm tests", () => {
     render(
       <Router>
         <HelpRequestForm submitAction={vi.fn()} />
-      </Router>
+      </Router>,
     );
 
     const emailField = await screen.findByTestId(
-      "HelpRequestForm-requesterEmail"
+      "HelpRequestForm-requesterEmail",
     );
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
@@ -123,7 +117,7 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Please enter a valid email address\./i);
     expect(
-      screen.getByText(/Please enter a valid email address\./i)
+      screen.getByText(/Please enter a valid email address\./i),
     ).toBeInTheDocument();
   });
 
@@ -131,11 +125,11 @@ describe("HelpRequestForm tests", () => {
     render(
       <Router>
         <HelpRequestForm submitAction={vi.fn()} />
-      </Router>
+      </Router>,
     );
 
     const emailField = await screen.findByTestId(
-      "HelpRequestForm-requesterEmail"
+      "HelpRequestForm-requesterEmail",
     );
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
@@ -147,7 +141,7 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Please enter a valid email address\./i);
     expect(
-      screen.getByText(/Please enter a valid email address\./i)
+      screen.getByText(/Please enter a valid email address\./i),
     ).toBeInTheDocument();
   });
 
@@ -155,11 +149,11 @@ describe("HelpRequestForm tests", () => {
     render(
       <Router>
         <HelpRequestForm submitAction={vi.fn()} />
-      </Router>
+      </Router>,
     );
 
     const emailField = await screen.findByTestId(
-      "HelpRequestForm-requesterEmail"
+      "HelpRequestForm-requesterEmail",
     );
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
@@ -171,7 +165,7 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Please enter a valid email address\./i);
     expect(
-      screen.getByText(/Please enter a valid email address\./i)
+      screen.getByText(/Please enter a valid email address\./i),
     ).toBeInTheDocument();
   });
 
@@ -181,22 +175,18 @@ describe("HelpRequestForm tests", () => {
     render(
       <Router>
         <HelpRequestForm submitAction={mockSubmit} />
-      </Router>
+      </Router>,
     );
 
     const requesterEmailField = await screen.findByTestId(
-      "HelpRequestForm-requesterEmail"
+      "HelpRequestForm-requesterEmail",
     );
     const teamIdField = screen.getByTestId("HelpRequestForm-teamId");
     const tableField = screen.getByTestId(
-      "HelpRequestForm-tableOrBreakoutRoom"
+      "HelpRequestForm-tableOrBreakoutRoom",
     );
-    const requestTimeField = screen.getByTestId(
-      "HelpRequestForm-requestTime"
-    );
-    const explanationField = screen.getByTestId(
-      "HelpRequestForm-explanation"
-    );
+    const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
+    const explanationField = screen.getByTestId("HelpRequestForm-explanation");
     const solvedCheckbox = screen.getByTestId("HelpRequestForm-solved");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
@@ -232,11 +222,11 @@ describe("HelpRequestForm tests", () => {
     render(
       <Router>
         <HelpRequestForm submitAction={vi.fn()} />
-      </Router>
+      </Router>,
     );
 
     const explanationField = await screen.findByTestId(
-      "HelpRequestForm-explanation"
+      "HelpRequestForm-explanation",
     );
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
@@ -246,7 +236,7 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Explanation must be 255 characters or less\./i);
     expect(
-      screen.getByText(/Explanation must be 255 characters or less\./i)
+      screen.getByText(/Explanation must be 255 characters or less\./i),
     ).toBeInTheDocument();
   });
 
@@ -264,7 +254,7 @@ describe("HelpRequestForm tests", () => {
           submitAction={vi.fn()}
           buttonLabel="Update"
         />
-      </Router>
+      </Router>,
     );
 
     const solvedCheckbox = await screen.findByTestId("HelpRequestForm-solved");
@@ -275,7 +265,7 @@ describe("HelpRequestForm tests", () => {
     render(
       <Router>
         <HelpRequestForm submitAction={vi.fn()} />
-      </Router>
+      </Router>,
     );
 
     const cancelButton = await screen.findByTestId("HelpRequestForm-cancel");
