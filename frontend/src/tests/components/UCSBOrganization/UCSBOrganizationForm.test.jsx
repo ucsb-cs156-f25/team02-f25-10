@@ -17,6 +17,16 @@ vi.mock("react-router", async () => {
 
 describe("UCSBOrganizationForm tests", () => {
   const queryClient = new QueryClient();
+  const testId = "UCSBOrganizationForm";
+
+  const renderForm = (props = {}) =>
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <UCSBOrganizationForm {...props} />
+        </Router>
+      </QueryClientProvider>
+    );
 
   const expectedHeaders = [
     "Org Code",
@@ -24,89 +34,98 @@ describe("UCSBOrganizationForm tests", () => {
     "Full Translation",
     "Inactive?",
   ];
-  const testId = "UCSBOrganizationForm";
 
   test("renders correctly with no initialContents", async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <UCSBOrganizationForm />
-        </Router>
-      </QueryClientProvider>
-    );
-
+    renderForm();
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
 
     expectedHeaders.forEach((headerText) => {
-      const header = screen.getByText(headerText);
-      expect(header).toBeInTheDocument();
+      expect(screen.getByText(headerText)).toBeInTheDocument();
     });
+
+    expect(
+      screen.getByTestId(`${testId}-orgcode`)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-orgTranslationShort`)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-orgTranslation`)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-inactive`)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-submit`)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-cancel`)
+    ).toBeInTheDocument();
+
+    const inactiveCheckbox = screen.getByTestId(`${testId}-inactive`);
+    expect(inactiveCheckbox).not.toBeChecked();
   });
 
   test("renders correctly when passing in initialContents", async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <UCSBOrganizationForm
-            initialContents={ucsbOrganizationFixtures.oneOrganization[0]}
-          />
-        </Router>
-      </QueryClientProvider>
-    );
-
-    expect(await screen.findByText(/Create/)).toBeInTheDocument();
-
-    expectedHeaders.forEach((headerText) => {
-      const header = screen.getByText(headerText);
-      expect(header).toBeInTheDocument();
+    renderForm({
+      initialContents: ucsbOrganizationFixtures.oneOrganization[0],
     });
 
-    expect(await screen.findByTestId(`${testId}-orgcode`)).toBeInTheDocument();
-    expect(screen.getByText("Org Code")).toBeInTheDocument();
+    expect(await screen.findByText(/Create|Update/)).toBeInTheDocument();
+
+    expectedHeaders.forEach((headerText) => {
+      expect(screen.getByText(headerText)).toBeInTheDocument();
+    });
+
+    const orgCodeField = screen.getByTestId(`${testId}-orgcode`);
+    expect(orgCodeField).toBeInTheDocument();
+    expect(orgCodeField).toBeDisabled();
+
+    const inactiveCheckbox = screen.getByTestId(`${testId}-inactive`);
+    if (ucsbOrganizationFixtures.oneOrganization[0].inactive) {
+      expect(inactiveCheckbox).toBeChecked();
+    } else {
+      expect(inactiveCheckbox).not.toBeChecked();
+    }
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <UCSBOrganizationForm />
-        </Router>
-      </QueryClientProvider>
-    );
-
-    expect(await screen.findByTestId(`${testId}-cancel`)).toBeInTheDocument();
-    const cancelButton = screen.getByTestId(`${testId}-cancel`);
-
+    renderForm();
+    const cancelButton = await screen.findByTestId(`${testId}-cancel`);
     fireEvent.click(cancelButton);
-
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
   });
 
   test("that the correct validations are performed", async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <UCSBOrganizationForm />
-        </Router>
-      </QueryClientProvider>
-    );
+    renderForm();
 
-    expect(await screen.findByText(/Create/)).toBeInTheDocument();
-    const submitButton = screen.getByText(/Create/);
+    const submitButton = await screen.findByText(/Create/);
     fireEvent.click(submitButton);
 
     await screen.findByText(/Organization code is required/);
     expect(
       screen.getByText(/Short translation is required/)
     ).toBeInTheDocument();
-    expect(screen.getByText(/Full translation is required/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Full translation is required/)
+    ).toBeInTheDocument();
 
     const shortInput = screen.getByTestId(`${testId}-orgTranslationShort`);
     fireEvent.change(shortInput, { target: { value: "a".repeat(21) } });
     fireEvent.click(submitButton);
+    await waitFor(() =>
+      expect(
+        screen.getByText(/Max length 20 characters/)
+      ).toBeInTheDocument()
+    );
 
-    await waitFor(() => {
-      expect(screen.getByText(/Max length 20 characters/)).toBeInTheDocument();
-    });
+    const orgCodeInput = screen.getByTestId(`${testId}-orgcode`);
+    fireEvent.change(orgCodeInput, { target: { value: "a".repeat(11) } });
+    fireEvent.click(submitButton);
+    await waitFor(() =>
+      expect(
+        screen.getByText(/Max length 10 characters/)
+      ).toBeInTheDocument()
+    );
   });
 });
