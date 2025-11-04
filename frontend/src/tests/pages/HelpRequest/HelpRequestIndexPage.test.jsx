@@ -34,7 +34,7 @@ describe("PlaceholderIndexPage tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <PlaceholderIndexPage />
+          <HelpRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
