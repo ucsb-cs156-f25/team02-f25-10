@@ -91,6 +91,7 @@ describe("RecommendationRequestForm tests", () => {
 
     await screen.findByText(/Requester email is required\./);
     expect(screen.getByText(/Professor email is required\./)).toBeInTheDocument();
+    expect(screen.getByText(/Explanation is required\./)).toBeInTheDocument();
     expect(screen.getByText(/Date requested required and must be in ISO format\./)).toBeInTheDocument();
     expect(screen.getByText(/Date needed required and must be in ISO format\./)).toBeInTheDocument();
   });
