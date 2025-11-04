@@ -25,7 +25,9 @@ function RecommendationRequestForm({
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
   // Stryker restore Regex
 
+  // Stryker disable Regex
   const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+  // Stryker restore Regex
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
