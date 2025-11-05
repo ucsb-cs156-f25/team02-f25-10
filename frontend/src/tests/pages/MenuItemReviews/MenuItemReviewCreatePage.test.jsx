@@ -113,9 +113,9 @@ describe("MenuItemReviewCreatePage tests", () => {
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
     expect(axiosMock.history.post[0].params).toEqual({
-      itemId: 1,
+      itemId: "1",
       reviewerEmail: "johndoe@ucsb.edu",
-      stars: 3,
+      stars: "3",
       dateReviewed: "2025-10-31T20:33:40",
       comments: "Pretty good",
     });
