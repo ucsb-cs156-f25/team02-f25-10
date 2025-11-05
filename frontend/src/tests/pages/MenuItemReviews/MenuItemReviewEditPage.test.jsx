@@ -231,7 +231,7 @@ describe("MenuItemReviewEditPage tests", () => {
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "Menu Item Review Updated - id: 17 Item ID: 5",
+        "Menu Item Review Updated - id: 17 Item ID: 1",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/menuitemreviews" });
     });
