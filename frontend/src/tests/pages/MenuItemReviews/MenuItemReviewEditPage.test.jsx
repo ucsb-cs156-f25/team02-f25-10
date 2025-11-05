@@ -150,6 +150,15 @@ describe("MenuItemReviewEditPage tests", () => {
       fireEvent.change(itemIdField, {
         target: { value: "5" },
       });
+      fireEvent.change(reviewerEmailField, {
+        target: { value: "komura@ucsb.edu" },
+      });
+      fireEvent.change(starsField, {
+        target: { value: "5" },
+      });
+      fireEvent.change(dateReviewedField, {
+        target: { value: "2025-11-30T20:33" },
+      });
       fireEvent.change(commentsField, {
         target: { value: "WOW" },
       });
@@ -167,9 +176,9 @@ describe("MenuItemReviewEditPage tests", () => {
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
           itemId: "5",
-          reviewerEmail: "johndoe@ucsb.edu",
-          stars: "3",
-          dateReviewed: "2025-10-31T20:33",
+          reviewerEmail: "komura@ucsb.edu",
+          stars: "5",
+          dateReviewed: "2025-11-30T20:33",
           comments: "WOW",
         }),
       ); // posted object
@@ -203,15 +212,26 @@ describe("MenuItemReviewEditPage tests", () => {
       expect(submitButton).toBeInTheDocument();
 
       fireEvent.change(itemIdField, {
-        target: { value: "8" },
+        target: { value: "5" },
       });
-      fireEvent.change(commentsField, { target: { value: "Meh" } });
+      fireEvent.change(reviewerEmailField, {
+        target: { value: "komura@ucsb.edu" },
+      });
+      fireEvent.change(starsField, {
+        target: { value: "5" },
+      });
+      fireEvent.change(dateReviewedField, {
+        target: { value: "2025-11-30T20:33" },
+      });
+      fireEvent.change(commentsField, {
+        target: { value: "WOW" },
+      });
 
       fireEvent.click(submitButton);
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "Menu Item Review Updated - id: 17 Item ID: 8",
+        "Menu Item Review Updated - id: 17 Item ID: 5",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/menuitemreviews" });
     });
