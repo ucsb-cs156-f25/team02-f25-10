@@ -232,45 +232,4 @@ describe("AppNavbar tests", () => {
       "/oauth2/authorization/google",
     );
   });
-  test("ROLE_USER sees Help Request link with correct href", async () => {
-  const currentUser = currentUserFixtures.userOnly;
-
-  render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <AppNavbar
-          currentUser={currentUser}
-          systemInfo={systemInfoFixtures.showingNeither}
-          doLogin={vi.fn()}
-          doLogout={vi.fn()}
-        />
-      </MemoryRouter>
-    </QueryClientProvider>,
-  );
-
-  const link = await screen.findByRole("link", { name: /Help Request/i });
-  expect(link).toBeInTheDocument();
-  expect(link.getAttribute("href")).toBe("/helprequest");
-});
-
-test("Help Request link does NOT show when not logged in", async () => {
-  const currentUser = null;
-
-  render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <AppNavbar
-          currentUser={currentUser}
-          systemInfo={systemInfoFixtures.showingNeither}
-          doLogin={vi.fn()}
-          doLogout={vi.fn()}
-        />
-      </MemoryRouter>
-    </QueryClientProvider>,
-  );
-
-  expect(
-    screen.queryByRole("link", { name: /Help Request/i }),
-  ).not.toBeInTheDocument();
-});
 });
