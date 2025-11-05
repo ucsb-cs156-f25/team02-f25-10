@@ -20,7 +20,7 @@ vi.mock("react-toastify", async (importOriginal) => {
   };
 });
 
-describe("PlaceholderIndexPage tests", () => {
+describe("HelpRequestIndexPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
   const testId = "HelpRequestTable";
