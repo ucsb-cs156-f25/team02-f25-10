@@ -27,8 +27,6 @@ function MenuItemReviewForm({
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
   const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const stars_regex = /^[1-5]$/;
-  const itemId_regex = /^[0-9]+$/;
   // Stryker restore Regex
 
   return (
@@ -56,14 +54,12 @@ function MenuItemReviewForm({
             <Form.Control
               data-testid={testIdPrefix + "-itemId"}
               id="itemId"
-              type="text"
+              type="number"
               isInvalid={Boolean(errors.itemId)}
               {...register("itemId", {
-                required: "Item ID is required",
-                pattern: {
-                  value: itemId_regex,
-                  message: "Item ID must be a number",
-                },
+                required: "Item ID is required.",
+                valueAsNumber: true,
+                min: { value: 1, message: "Item ID must be greater than 0" },
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -102,15 +98,18 @@ function MenuItemReviewForm({
             <Form.Control
               data-testid={testIdPrefix + "-stars"}
               id="stars"
-              type="text"
-              min="1"
-              max="5"
+              type="number"
               isInvalid={Boolean(errors.stars)}
               {...register("stars", {
-                required: "Stars are required",
-                pattern: {
-                  value: stars_regex,
-                  message: "Stars must be a number between 1-5",
+                required: "Stars are required.",
+                valueAsNumber: true,
+                min: {
+                  value: 1,
+                  message: "Stars must be a number from 1 to 5",
+                },
+                max: {
+                  value: 5,
+                  message: "Stars must be a number from 1 to 5",
                 },
               })}
             />
