@@ -112,7 +112,7 @@ describe("MenuItemReviewForm tests", () => {
     });
 
     const itemIdInput = screen.getByTestId(`${testId}-itemId`);
-    fireEvent.change(commentInput, { target: { value: "bad" } });
+    fireEvent.change(itemIdInput, { target: { value: "bad" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
