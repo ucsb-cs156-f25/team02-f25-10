@@ -4,7 +4,7 @@ import { Navigate } from "react-router";
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-export default function MenuItemReviewCreatePage() {
+export default function MenuItemReviewCreatePage({ storybook = false }) {
   const objectToAxiosParams = (menuItemReview) => ({
     url: "/api/menuitemreviews/post",
     method: "POST",
@@ -13,7 +13,7 @@ export default function MenuItemReviewCreatePage() {
       reviewerEmail: menuItemReview.reviewerEmail,
       stars: menuItemReview.stars,
       dateReviewed: menuItemReview.dateReviewed,
-      comments: menuItemReview.comments
+      comments: menuItemReview.comments,
     },
   });
 
