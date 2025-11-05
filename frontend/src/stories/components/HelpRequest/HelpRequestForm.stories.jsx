@@ -1,42 +1,33 @@
 import React from "react";
-import HelpRequestTable from "main/components/HelpRequest/HelpRequestTable";
+import HelpRequestForm from "main/components/HelpRequest/HelpRequestForm";
 import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
-import { currentUserFixtures } from "fixtures/currentUserFixtures";
-import { http, HttpResponse } from "msw";
 
 export default {
-  title: "components/HelpRequest/HelpRequestTable",
-  component: HelpRequestTable,
+  title: "components/HelpRequest/HelpRequestForm",
+  component: HelpRequestForm,
 };
 
 const Template = (args) => {
-  return <HelpRequestTable {...args} />;
+  return <HelpRequestForm {...args} />;
 };
 
-export const Empty = Template.bind({});
+export const Create = Template.bind({});
 
-Empty.args = {
-  helpRequests: [],
-  currentUser: currentUserFixtures.userOnly,
+Create.args = {
+  buttonLabel: "Create",
+  submitAction: (data) => {
+    console.log("Submit was clicked with data: ", data);
+    window.alert("Submit was clicked with data: " + JSON.stringify(data));
+  },
 };
 
-export const ThreeItemsOrdinaryUser = Template.bind({});
+export const Update = Template.bind({});
 
-ThreeItemsOrdinaryUser.args = {
-  helpRequests: helpRequestFixtures.threeHelpRequests,
-  currentUser: currentUserFixtures.userOnly,
-};
-
-export const ThreeItemsAdminUser = Template.bind({});
-ThreeItemsAdminUser.args = {
-  helpRequests: helpRequestFixtures.threeHelpRequests,
-  currentUser: currentUserFixtures.adminUser,
-};
-
-ThreeItemsAdminUser.parameters = {
-  msw: [
-    http.delete("/api/helprequest", () => {
-      return HttpResponse.json({}, { status: 200 });
-    }),
-  ],
+Update.args = {
+  initialContents: helpRequestFixtures.oneDate,
+  buttonLabel: "Update",
+  submitAction: (data) => {
+    console.log("Submit was clicked with data: ", data);
+    window.alert("Submit was clicked with data: " + JSON.stringify(data));
+  },
 };
