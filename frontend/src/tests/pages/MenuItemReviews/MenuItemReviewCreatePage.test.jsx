@@ -100,7 +100,7 @@ describe("MenuItemReviewCreatePage tests", () => {
     const commentsInput = screen.getByLabelText("Comments");
     expect(commentsInput).toBeInTheDocument();
 
-    const createButton = screen.getByText(/Create/);
+    const createButton = screen.getByRole('button', { name: /Create/ });
     expect(createButton).toBeInTheDocument();
 
     fireEvent.change(itemIdInput, { target: { value: "1" } });
@@ -123,7 +123,7 @@ describe("MenuItemReviewCreatePage tests", () => {
 
     // assert - check that the toast was called with the expected message
     expect(mockToast).toBeCalledWith(
-      "New Menu Item Review Created - id: 1 itemId 1",
+      "New Menu Item Review Created - id: 1 item ID: 1",
     );
     expect(mockNavigate).toBeCalledWith({ to: "/menuitemreviews" });
   });
