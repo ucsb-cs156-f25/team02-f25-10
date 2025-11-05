@@ -67,7 +67,7 @@ describe("MenuItemReviewCreatePage tests", () => {
       itemId: 1,
       reviewerEmail: "johndoe@ucsb.edu",
       stars: 3,
-      dateReviewed: "2025-10-31T20:33:40",
+      dateReviewed: "2025-10-31T20:33",
       comments: "Pretty good",
     };
 
@@ -106,7 +106,7 @@ describe("MenuItemReviewCreatePage tests", () => {
     fireEvent.change(itemIdInput, { target: { value: "1" } });
     fireEvent.change(reviewerEmailInput, { target: { value: "johndoe@ucsb.edu" } });
     fireEvent.change(starsInput, { target: { value: "3" } });
-    fireEvent.change(dateReviewedInput, { target: { value: "2025-10-31T20:33:40" } });
+    fireEvent.change(dateReviewedInput, { target: { value: "2025-10-31T20:33" } });
     fireEvent.change(commentsInput, { target: { value: "Pretty good" } });
     fireEvent.click(createButton);
 
@@ -116,7 +116,7 @@ describe("MenuItemReviewCreatePage tests", () => {
       itemId: "1",
       reviewerEmail: "johndoe@ucsb.edu",
       stars: "3",
-      dateReviewed: "2025-10-31T20:33:40",
+      dateReviewed: "2025-10-31T20:33",
       comments: "Pretty good",
     });
 
