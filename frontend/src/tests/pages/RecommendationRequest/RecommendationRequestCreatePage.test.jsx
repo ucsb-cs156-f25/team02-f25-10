@@ -69,7 +69,7 @@ describe("RecommendationRequestCreatePage tests", () => {
       explanation: "please recommend me!",
       daterequested: "2025-09-10T10:11",
       dateneeded: "2025-09-10T10:11",
-      done: true
+      done: false
     };
 
     axiosMock.onPost("/api/recommendationrequest/post").reply(202, recommendationRequest);
@@ -105,7 +105,7 @@ describe("RecommendationRequestCreatePage tests", () => {
     fireEvent.change(dateneededField, {
       target: { value: "2025-09-10T10:11" },
     });
-    fireEvent.change(doneField, { target: { value: "true" } });
+    fireEvent.change(doneField, { target: { checked: false } });
 
     expect(submitButton).toBeInTheDocument();
 
@@ -114,7 +114,7 @@ describe("RecommendationRequestCreatePage tests", () => {
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
     expect(axiosMock.history.post[0].params).toEqual({
-      done: true,
+      done: false,
       dateneeded: "2025-09-10T10:11",
       daterequested: "2025-09-10T10:11",
       explanation: "please recommend me!",
