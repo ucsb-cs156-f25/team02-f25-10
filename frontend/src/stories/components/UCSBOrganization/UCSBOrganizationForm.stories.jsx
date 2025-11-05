@@ -1,14 +1,14 @@
 import React from "react";
-import MenuItemReviewForm from "main/components/MenuItemReviews/MenuItemReviewForm";
-import { menuItemReviewFixtures } from "fixtures/menuItemReviewFixtures";
+import UCSBOrganizationForm from "main/components/UCSBOrganization/UCSBOrganizationForm";
+import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
 
 export default {
-  title: "components/MenuItemReviews/MenuItemReviewForm",
-  component: MenuItemReviewForm,
+  title: "components/UCSBOrganization/UCSBOrganizationForm",
+  component: UCSBOrganizationForm,
 };
 
 const Template = (args) => {
-  return <MenuItemReviewForm {...args} />;
+  return <UCSBOrganizationForm {...args} />;
 };
 
 export const Create = Template.bind({});
@@ -24,7 +24,7 @@ Create.args = {
 export const Update = Template.bind({});
 
 Update.args = {
-  initialContents: menuItemReviewFixtures.oneMenuItemReview,
+  initialContents: ucsbOrganizationFixtures.oneOrganization[0],
   buttonLabel: "Update",
   submitAction: (data) => {
     console.log("Submit was clicked with data: ", data);
