@@ -111,8 +111,8 @@ describe("MenuItemReviewForm tests", () => {
       ).toBeInTheDocument();
     });
 
-    const itemIdInput = screen.getByTestId(`${testId}-itemId`);
-    fireEvent.change(itemIdInput, { target: { value: "bad" } });
+    const itemIdInput1 = screen.getByTestId(`${testId}-itemId`);
+    fireEvent.change(itemIdInput1, { target: { value: "bad" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -121,8 +121,12 @@ describe("MenuItemReviewForm tests", () => {
       ).toBeInTheDocument();
     });
 
+    const itemIdInput2 = screen.getByTestId(`${testId}-itemId`);
+    fireEvent.change(itemIdInput2, { target: { value: "1" } });
+    fireEvent.click(submitButton);
+
     const starsInput1 = screen.getByTestId(`${testId}-stars`);
-    fireEvent.change(starsInput1, { target: { value: 6 } });
+    fireEvent.change(starsInput1, { target: { value: "6" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -130,7 +134,7 @@ describe("MenuItemReviewForm tests", () => {
     });
 
     const starsInput2 = screen.getByTestId(`${testId}-stars`);
-    fireEvent.change(starsInput2, { target: { value: 0 } });
+    fireEvent.change(starsInput2, { target: { value: "0" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -144,6 +148,10 @@ describe("MenuItemReviewForm tests", () => {
     await waitFor(() => {
       expect(screen.getByText(/Stars must be a number between 1-5/)).toBeInTheDocument();
     });
+
+    const starsInput4 = screen.getByTestId(`${testId}-stars`);
+    fireEvent.change(starsInput4, { target: { value: "3" } });
+    fireEvent.click(submitButton);
 
     const emailInput = screen.getByTestId(`${testId}-reviewerEmail`);
     fireEvent.change(emailInput, { target: { value: "blah" } });

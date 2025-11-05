@@ -54,13 +54,15 @@ function MenuItemReviewForm({
             <Form.Control
               data-testid={testIdPrefix + "-itemId"}
               id="itemId"
-              type="number"
+              type="text"
               isInvalid={Boolean(errors.itemId)}
               {...register("itemId", {
                 required: "Item ID is required",
-                valueAsNumber: true,
-                validate: (value) =>
-                  !isNaN(value) || "Item ID must be a number",
+                validate: (value) => {
+                  const num = Number(value);
+                  if (isNaN(num)) return "Item ID must be a number";
+                  return true;
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -99,17 +101,19 @@ function MenuItemReviewForm({
             <Form.Control
               data-testid={testIdPrefix + "-stars"}
               id="stars"
-              type="number"
+              type="text"
               min="1"
               max="5"
               isInvalid={Boolean(errors.stars)}
               {...register("stars", {
                 required: "Stars are required",
-                min: { value: 1, message: "Must be at least 1" },
-                max: { value: 5, message: "Cannot exceed 5" },
-                valueAsNumber: true,
-                validate: (value) =>
-                  !isNaN(value) || "Stars must be a number between 1-5",
+                validate: (value) => {
+                  const num = Number(value);
+                  if (isNaN(num)) return "Stars must be a number between 1-5";
+                  if (num < 1) return "Must be at least 1";
+                  if (num > 5) return "Cannot exceed 5";
+                  return true;
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">
