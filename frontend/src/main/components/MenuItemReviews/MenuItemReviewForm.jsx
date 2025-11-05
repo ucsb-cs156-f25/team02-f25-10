@@ -58,10 +58,9 @@ function MenuItemReviewForm({
               isInvalid={Boolean(errors.itemId)}
               {...register("itemId", {
                 required: "Item ID is required",
-                validate: (value) => {
-                  const num = Number(value);
-                  if (isNaN(num)) return "Item ID must be a number";
-                  return true;
+                pattern: {
+                  value: /^[0-9]+$/, 
+                  message: "Item ID must be a number",
                 },
               })}
             />
@@ -107,13 +106,10 @@ function MenuItemReviewForm({
               isInvalid={Boolean(errors.stars)}
               {...register("stars", {
                 required: "Stars are required",
-                validate: (value) => {
-                  const num = Number(value);
-                  if (isNaN(num)) return "Stars must be a number between 1-5";
-                  if (num < 1) return "Must be at least 1";
-                  if (num > 5) return "Cannot exceed 5";
-                  return true;
-                },
+                pattern: {
+                  value: /^[1-5]$/,
+                  message: "Stars must be a number between 1-5",
+                }
               })}
             />
             <Form.Control.Feedback type="invalid">
