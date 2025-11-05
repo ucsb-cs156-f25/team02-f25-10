@@ -129,7 +129,7 @@ describe("MenuItemReviewEditPage tests", () => {
       const dateReviewedField = screen.getByLabelText("Date Reviewed")
       const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
 
-      const submitButton = screen.getByRole('button', { name: /Create/ });
+      const submitButton = screen.getByRole('button', { name: /Update/ });
 
       expect(idField).toBeInTheDocument();
       expect(idField).toHaveValue("17");
@@ -189,7 +189,7 @@ describe("MenuItemReviewEditPage tests", () => {
       const starsField = screen.getByTestId("MenuItemReviewForm-stars");
       const dateReviewedField = screen.getByLabelText("Date Reviewed")
       const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
-      const submitButton = screen.getByRole('button', { name: /Create/ });
+      const submitButton = screen.getByRole('button', { name: /Update/ });
 
       expect(idField).toHaveValue("17");
       expect(itemIdField).toHaveValue("1");
