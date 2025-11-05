@@ -112,11 +112,11 @@ describe("MenuItemReviewForm tests", () => {
     });
 
     const itemIdInput1 = screen.getByTestId(`${testId}-itemId`);
-    fireEvent.change(itemIdInput1, { target: { value: "bad" } });
+    fireEvent.change(itemIdInput1, { target: { value: "0" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/Item ID must be a number/)).toBeInTheDocument();
+      expect(screen.getByText(/Item ID must be greater than 0/)).toBeInTheDocument();
     });
 
     const starsInput3 = screen.getByTestId(`${testId}-stars`);
@@ -125,7 +125,7 @@ describe("MenuItemReviewForm tests", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/Stars must be a number between 1-5/),
+        screen.getByText(/Stars must be a number from 1 to 5/),
       ).toBeInTheDocument();
     });
 
