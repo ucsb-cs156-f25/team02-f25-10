@@ -136,13 +136,13 @@ describe("MenuItemReviewEditPage tests", () => {
       expect(itemIdField).toBeInTheDocument();
       expect(itemIdField).toHaveValue("1");
       expect(reviewerEmailField).toBeInTheDocument();
-      expect(reviewerEmailField).toHaveValue("komura@ucsb.edu");
+      expect(reviewerEmailField).toHaveValue("johndoe@ucsb.edu");
       expect(starsField).toBeInTheDocument();
-      expect(starsField).toHaveValue("4"); 
+      expect(starsField).toHaveValue("3"); 
       expect(dateReviewedField).toBeInTheDocument();
-      expect(dateReviewedField).toHaveValue("2027-10-31T20:33");
+      expect(dateReviewedField).toHaveValue("2025-10-31T20:33");
       expect(commentsField).toBeInTheDocument();
-      expect(commentsField).toHaveValue("Really good");
+      expect(commentsField).toHaveValue("Pretty good");
       
 
       expect(submitButton).toHaveTextContent("Update");
@@ -157,7 +157,7 @@ describe("MenuItemReviewEditPage tests", () => {
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "Menu Item Review Updated - id: 17 Item ID: 5",
+        "Menu Item Review Updated - id: 17 Item ID: 1",
       );
 
       expect(mockNavigate).toBeCalledWith({ to: "/menuitemreviews" });
@@ -167,6 +167,9 @@ describe("MenuItemReviewEditPage tests", () => {
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
           itemId: "5",
+          reviewerEmail: "johndoe@ucsb.edu",
+          stars: "3",
+          dateReviewed: "2025-10-31T20:33",
           comments: "WOW",
         }),
       ); // posted object
