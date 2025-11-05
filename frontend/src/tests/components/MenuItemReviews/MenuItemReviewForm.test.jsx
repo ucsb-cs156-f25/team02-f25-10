@@ -116,9 +116,7 @@ describe("MenuItemReviewForm tests", () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(
-        screen.getByText(/Item ID must be a number/),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Item ID must be a number/)).toBeInTheDocument();
     });
 
     const starsInput3 = screen.getByTestId(`${testId}-stars`);
@@ -126,7 +124,9 @@ describe("MenuItemReviewForm tests", () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/Stars must be a number between 1-5/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Stars must be a number between 1-5/),
+      ).toBeInTheDocument();
     });
 
     const emailInput = screen.getByTestId(`${testId}-reviewerEmail`);
