@@ -10,7 +10,7 @@ export default function MenuItemReviewCreatePage({ storybook = false }) {
     method: "POST",
     params: {
       itemId: menuitemreview.itemId,
-      reviewerEmail: menuitemreview.itemId,
+      reviewerEmail: menuitemreview.reviewerEmail,
       stars: menuitemreview.stars,
       dateReviewed: menuitemreview.dateReviewed,
       comments: menuitemreview.comments,
