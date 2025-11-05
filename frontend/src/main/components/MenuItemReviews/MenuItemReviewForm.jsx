@@ -27,6 +27,8 @@ function MenuItemReviewForm({
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
   const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const stars_regex =  /^[1-5]$/;
+  const itemId_regex = /^[0-9]+$/;
   // Stryker restore Regex
 
   return (
@@ -54,12 +56,14 @@ function MenuItemReviewForm({
             <Form.Control
               data-testid={testIdPrefix + "-itemId"}
               id="itemId"
-              type="number"
+              type="text"
               isInvalid={Boolean(errors.itemId)}
               {...register("itemId", {
-                required: "Item ID is required.",
-                valueAsNumber: true,
-                min: { value: 1, message: "Item ID must be greater than 0" },
+                required: "Item ID is required",
+                pattern: {
+                  value: itemId_regex, 
+                  message: "Item ID must be a number",
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -98,19 +102,16 @@ function MenuItemReviewForm({
             <Form.Control
               data-testid={testIdPrefix + "-stars"}
               id="stars"
-              type="number"
+              type="text"
+              min="1"
+              max="5"
               isInvalid={Boolean(errors.stars)}
               {...register("stars", {
-                required: "Stars are required.",
-                valueAsNumber: true,
-                min: {
-                  value: 1,
-                  message: "Stars must be a number from 1 to 5",
-                },
-                max: {
-                  value: 5,
-                  message: "Stars must be a number from 1 to 5",
-                },
+                required: "Stars are required",
+                pattern: {
+                  value: stars_regex,
+                  message: "Stars must be a number between 1-5",
+                }
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -164,7 +165,9 @@ function MenuItemReviewForm({
 
       <Row>
         <Col>
-          <Button type="submit">{buttonLabel}</Button>
+          <Button type="submit">
+            {buttonLabel}
+          </Button>
           <Button
             variant="Secondary"
             onClick={() => navigate(-1)}
