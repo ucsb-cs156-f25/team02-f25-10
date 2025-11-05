@@ -92,7 +92,7 @@ describe("MenuItemReviewEditPage tests", () => {
         dateReviewed: "2025-10-31T20:33",
         comments: "Pretty good",
       });
-      axiosMock.onPut("/api/restaurants").reply(200, {
+      axiosMock.onPut("/api/menuitemreviews").reply(200, {
         id: "17",
         itemId: 1,
         reviewerEmail: "komura@ucsb.edu",
