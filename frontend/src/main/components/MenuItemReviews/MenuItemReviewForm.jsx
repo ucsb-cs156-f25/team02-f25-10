@@ -27,7 +27,7 @@ function MenuItemReviewForm({
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
   const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const stars_regex =  /^[1-5]$/;
+  const stars_regex = /^[1-5]$/;
   const itemId_regex = /^[0-9]+$/;
   // Stryker restore Regex
 
@@ -61,7 +61,7 @@ function MenuItemReviewForm({
               {...register("itemId", {
                 required: "Item ID is required",
                 pattern: {
-                  value: itemId_regex, 
+                  value: itemId_regex,
                   message: "Item ID must be a number",
                 },
               })}
@@ -111,7 +111,7 @@ function MenuItemReviewForm({
                 pattern: {
                   value: stars_regex,
                   message: "Stars must be a number between 1-5",
-                }
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -165,9 +165,7 @@ function MenuItemReviewForm({
 
       <Row>
         <Col>
-          <Button type="submit">
-            {buttonLabel}
-          </Button>
+          <Button type="submit">{buttonLabel}</Button>
           <Button
             variant="Secondary"
             onClick={() => navigate(-1)}
