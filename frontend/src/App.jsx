@@ -97,7 +97,6 @@ function App() {
             path="/recommendationrequest/create"
             element={<RecommendationRequestCreatePage />}
           />
-          />
         </>
       )}
       {hasRole(currentUser, "ROLE_USER") && (
