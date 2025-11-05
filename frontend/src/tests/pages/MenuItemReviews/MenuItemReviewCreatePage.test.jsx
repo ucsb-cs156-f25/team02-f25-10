@@ -82,10 +82,10 @@ describe("MenuItemReviewCreatePage tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByLabelText("ItemId")).toBeInTheDocument();
+      expect(screen.getByLabelText("Item ID")).toBeInTheDocument();
     });
 
-    const itemIdInput = screen.getByLabelText("ItemId");
+    const itemIdInput = screen.getByLabelText("Item ID");
     expect(itemIdInput).toBeInTheDocument();
 
     const reviewerEmailInput = screen.getByLabelText("Reviewer Email");
