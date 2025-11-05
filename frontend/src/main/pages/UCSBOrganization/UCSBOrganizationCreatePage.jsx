@@ -1,12 +1,51 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import UCSBOrganizationForm from "main/components/UCSBOrganization/UCSBOrganizationForm";
+import { Navigate } from "react-router";
+import { useBackendMutation } from "main/utils/useBackend";
+import { toast } from "react-toastify";
 
-export default function UCSBOrganizationCreatePage() {
-  // Stryker disable all : placeholder for future implementation
+export default function UCSBOrganizationCreatePage({ storybook = false }) {
+  const objectToAxiosParams = (organization) => ({
+    url: "/api/ucsborganization/post",
+    method: "POST",
+    params: {
+      orgcode: organization.orgcode,
+      orgTranslationShort: organization.orgTranslationShort,
+      orgTranslation: organization.orgTranslation,
+      inactive: organization.inactive,
+    },
+  });
+
+  const onSuccess = (organization) => {
+    toast(
+      `New UCSB Organization Created - orgcode: ${organization.orgcode}, name: ${organization.orgTranslation}`
+    );
+  };
+
+  const mutation = useBackendMutation(
+    objectToAxiosParams,
+    { onSuccess },
+    // Stryker disable next-line all : hard to set up test for caching
+    ["/api/ucsborganization/all"]
+  );
+
+  const { isSuccess } = mutation;
+
+  const onSubmit = async (data) => {
+    mutation.mutate(data);
+  };
+
+  if (isSuccess && !storybook) {
+    return <Navigate to="/ucsborganization" />;
+  }
+
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Create page not yet implemented</h1>
+        <h1>Create New UCSB Organization</h1>
+        <UCSBOrganizationForm submitAction={onSubmit} />
       </div>
     </BasicLayout>
   );
 }
+
