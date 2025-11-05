@@ -1,14 +1,14 @@
 import React from "react";
-import HelpRequestForm from "main/components/HelpRequest/HelpRequestForm";
-import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
+import UCSBOrganizationForm from "main/components/UCSBOrganization/UCSBOrganizationForm";
+import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
 
 export default {
-  title: "components/HelpRequest/HelpRequestForm",
-  component: HelpRequestForm,
+  title: "components/UCSBOrganization/UCSBOrganizationForm",
+  component: UCSBOrganizationForm,
 };
 
 const Template = (args) => {
-  return <HelpRequestForm {...args} />;
+  return <UCSBOrganizationForm {...args} />;
 };
 
 export const Create = Template.bind({});
@@ -24,7 +24,7 @@ Create.args = {
 export const Update = Template.bind({});
 
 Update.args = {
-  initialContents: helpRequestFixtures.oneDate,
+  initialContents: ucsbOrganizationFixtures.oneOrganization[0],
   buttonLabel: "Update",
   submitAction: (data) => {
     console.log("Submit was clicked with data: ", data);
