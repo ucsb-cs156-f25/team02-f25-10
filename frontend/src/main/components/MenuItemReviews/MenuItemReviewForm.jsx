@@ -52,13 +52,12 @@ function MenuItemReviewForm({
           <Form.Group className="mb-3">
             <Form.Label htmlFor="itemId">Item ID</Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-itemId"}
               id="itemId"
               type="number"
               isInvalid={Boolean(errors.itemId)}
               {...register("itemId", {
                 required: "Item ID is required",
-                valueAsNumber: true,
+                setValueAs: (v) => (v === "" ? undefined : Number(v)),
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -105,7 +104,7 @@ function MenuItemReviewForm({
                 required: "Stars are required",
                 min: { value: 1, message: "Must be at least 1" },
                 max: { value: 5, message: "Cannot exceed 5" },
-                valueAsNumber: true,
+                setValueAs: (v) => (v === "" ? undefined : Number(v))
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -118,7 +117,6 @@ function MenuItemReviewForm({
           <Form.Group className="mb-3">
             <Form.Label htmlFor="dateReviewed">Date Reviewed</Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-dateReviewed"}
               id="dateReviewed"
               type="datetime-local"
               isInvalid={Boolean(errors.dateReviewed)}
@@ -160,7 +158,7 @@ function MenuItemReviewForm({
 
       <Row>
         <Col>
-          <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+          <Button type="submit">
             {buttonLabel}
           </Button>
           <Button
