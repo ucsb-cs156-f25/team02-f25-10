@@ -20,7 +20,7 @@ const ucsbOrganizationFixtures = {
       orgcode: "WiCS",
       orgTranslationShort: "WiCS",
       orgTranslation: "Women in Computer Science",
-      inactive: false,
+      inactive: true,
     },
     
     {
