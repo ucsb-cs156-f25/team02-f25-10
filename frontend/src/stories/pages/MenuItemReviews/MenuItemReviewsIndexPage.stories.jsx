@@ -4,10 +4,10 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { menuItemReviewFixtures } from "fixtures/menuItemReviewFixtures";
 import { http, HttpResponse } from "msw";
 
-import MenuItemReviewIndexPage from "main/pages/MenuItemReview/MenuItemReviewIndexPage";
+import MenuItemReviewIndexPage from "main/pages/MenuItemReviews/MenuItemReviewIndexPage";
 
 export default {
-  title: "pages/MenuItemReview/MenuItemReviewIndexPage",
+  title: "pages/MenuItemReviews/MenuItemReviewIndexPage",
   component: MenuItemReviewIndexPage,
 };
 
