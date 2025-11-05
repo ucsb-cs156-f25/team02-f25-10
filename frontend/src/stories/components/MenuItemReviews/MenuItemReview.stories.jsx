@@ -1,14 +1,14 @@
 import React from "react";
-import HelpRequestForm from "main/components/HelpRequest/HelpRequestForm";
-import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
+import MenuItemReviewForm from "main/components/MenuItemReviews/MenuItemReviewForm";
+import { menuItemReviewFixtures } from "fixtures/menuItemReviewFixtures";
 
 export default {
-  title: "components/HelpRequest/HelpRequestForm",
-  component: HelpRequestForm,
+  title: "components/MenuItemReviews/MenuItemReviewForm",
+  component: MenuItemReviewForm,
 };
 
 const Template = (args) => {
-  return <HelpRequestForm {...args} />;
+  return <MenuItemReviewForm {...args} />;
 };
 
 export const Create = Template.bind({});
@@ -24,7 +24,7 @@ Create.args = {
 export const Update = Template.bind({});
 
 Update.args = {
-  initialContents: helpRequestFixtures.oneDate,
+  initialContents: menuItemReviewFixtures.oneMenuItemReview,
   buttonLabel: "Update",
   submitAction: (data) => {
     console.log("Submit was clicked with data: ", data);
