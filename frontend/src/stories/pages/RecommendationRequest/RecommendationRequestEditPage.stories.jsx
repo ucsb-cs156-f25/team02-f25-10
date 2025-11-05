@@ -27,7 +27,7 @@ Default.parameters = {
       });
     }),
     http.get("/api/recommendationrequest", () => {
-      return HttpResponse.json(recommendationRequestFixtures.threeDates[0], {
+      return HttpResponse.json(recommendationRequestFixtures.threeRecommendationRequests[0], {
         status: 200,
       });
     }),
