@@ -4,8 +4,8 @@ const recommendationRequestFixtures = {
     requesteremail: "em1@mail.com",
     professoremail: "em2@mail.com",
     explanation: "please recommend",
-    daterequested: "2025-10-10T10:10:10",
-    dateneeded: "2025-10-10T10:10:10",
+    daterequested: "2025-10-10T10:10",
+    dateneeded: "2025-10-10T10:10",
     done: true
   },
   threeRecommendationRequests: [
@@ -14,8 +14,8 @@ const recommendationRequestFixtures = {
         requesteremail: "em1@mail.com",
         professoremail: "em2@mail.com",
         explanation: "please recommend",
-        daterequested: "2025-10-10T10:10:10",
-        dateneeded: "2025-10-10T10:10:10",
+        daterequested: "2025-10-10T10:10",
+        dateneeded: "2025-10-10T10:10",
         done: true
     },
     {
@@ -23,8 +23,8 @@ const recommendationRequestFixtures = {
         requesteremail: "ai1@mail.com",
         professoremail: "ai2@mail.com",
         explanation: "please dont recommend",
-        daterequested: "2025-11-10T10:10:10",
-        dateneeded: "2025-11-10T10:10:10",
+        daterequested: "2025-11-10T10:10",
+        dateneeded: "2025-11-10T10:10",
         done: false
     },
     {
@@ -32,8 +32,8 @@ const recommendationRequestFixtures = {
         requesteremail: "le1@mail.com",
         professoremail: "le2@mail.com",
         explanation: "i request a recommendation",
-        daterequested: "2025-12-10T10:10:10",
-        dateneeded: "2025-12-10T10:10:10",
+        daterequested: "2025-12-10T10:10",
+        dateneeded: "2025-12-10T10:10",
         done: true
     },
   ],
