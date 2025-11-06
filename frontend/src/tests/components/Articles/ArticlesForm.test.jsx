@@ -200,6 +200,23 @@ describe("ArticlesForm tests", () => {
         <ArticlesForm submitAction={vi.fn()} />
       </Router>,
     );
+
+const emailField = await screen.findByTestId(
+      "ArticlesForm-email",
+    );
+    const submitButton = screen.getByTestId("ArticlesForm-submit");
+
+    fireEvent.change(emailField, {
+      target: { value: "something@ucsb.edu junk" },
+    });
+    fireEvent.blur(emailField);
+    fireEvent.click(submitButton);
+
+    await screen.findByText(/Please enter a valid email address/);
+    expect(
+      screen.getByText(/Please enter a valid email address/),
+    ).toBeInTheDocument();
+
   });
 
   test("submits valid form successfully", async () => {
