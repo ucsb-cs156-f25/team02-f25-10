@@ -80,6 +80,7 @@ public class MenuItemReviewIT {
 
     MenuItemReview menuItemReview1 =
         MenuItemReview.builder()
+            .id(1)
             .itemId(4)
             .reviewerEmail("johndoe@ucsb.edu")
             .stars(5)
@@ -93,9 +94,9 @@ public class MenuItemReviewIT {
             .perform(
                 post("/api/menuitemreviews/post"
                         + "?itemId=4"
-                        + "&reviewerEmail=johndoe%40ucsb.edu"
+                        + "&reviewerEmail=johndoe@ucsb.edu"
                         + "&stars=5"
-                        + "&dateReviewed=2025-10-31T20%3A33%3A40"
+                        + "&dateReviewed=2025-10-31T20:33:40"
                         + "&comments=Great")
                     .with(csrf()))
             .andExpect(status().isOk())
