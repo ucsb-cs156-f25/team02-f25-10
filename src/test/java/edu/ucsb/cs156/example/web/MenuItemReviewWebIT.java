@@ -29,7 +29,7 @@ public class MenuItemReviewWebIT extends WebTestCase {
     page.getByTestId("MenuItemReviewForm-itemId").fill("2");
     page.getByTestId("MenuItemReviewForm-reviewerEmail").fill("johndoe@ucsb.edu");
     page.getByTestId("MenuItemReviewForm-stars").fill("3");
-    page.getByLabel("dateReviewed").fill("2025-10-31T20:33");
+    page.getByLabel("Date Reviewed").fill("2025-10-31T20:33");
     page.getByTestId("MenuItemReviewForm-comments").fill("Very good");
     page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create")).click();
 
