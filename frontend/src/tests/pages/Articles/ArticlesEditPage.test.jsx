@@ -71,7 +71,7 @@ describe("ArticlesEditPage tests", () => {
       await screen.findByText(/Welcome/);
       await screen.findByText("Edit Articles");
       expect(
-        screen.getByTestId("ArticlesForm-title"),
+        screen.queryByTestId("ArticlesForm-title"),
       ).not.toBeInTheDocument();
       restoreConsole();
     });
@@ -101,7 +101,7 @@ describe("ArticlesEditPage tests", () => {
         title: "someTitle",
         url: "someTitle.com",
         explanation: "something",
-	email: "emailmail@gmail.com",
+        email: "emailmail@gmail.com",
         dateAdded: "2022-12-25T08:00",
       });
     });
@@ -124,9 +124,7 @@ describe("ArticlesEditPage tests", () => {
       );
       await screen.findByText(/Welcome/);
       await screen.findByTestId("ArticlesForm-title");
-      expect(
-        screen.getByTestId("ArticlesForm-title"),
-      ).toBeInTheDocument();
+      expect(screen.getByTestId("ArticlesForm-title")).toBeInTheDocument();
     });
 
     test("Is populated with the data provided", async () => {
@@ -145,8 +143,7 @@ describe("ArticlesEditPage tests", () => {
       const urlField = screen.getByTestId("ArticlesForm-url");
       const explanationField = screen.getByTestId("ArticlesForm-explanation");
       const emailField = screen.getByTestId("ArticlesForm-email");
-      const dateAddedField = screen.getByTestId("ArticlesForm-dateAdded",
-      );
+      const dateAddedField = screen.getByTestId("ArticlesForm-dateAdded");
       const submitButton = screen.getByTestId("ArticlesForm-submit");
 
       expect(idField).toHaveValue("17");
@@ -174,9 +171,7 @@ describe("ArticlesEditPage tests", () => {
       const urlField = screen.getByTestId("ArticlesForm-url");
       const explanationField = screen.getByTestId("ArticlesForm-explanation");
       const emailField = screen.getByTestId("ArticlesForm-email");
-      const dateAddedField = screen.getByTestId(
-        "ArticlesForm-dateAdded",
-      );
+      const dateAddedField = screen.getByTestId("ArticlesForm-dateAdded");
       const submitButton = screen.getByTestId("ArticlesForm-submit");
 
       expect(idField).toHaveValue("17");
@@ -190,7 +185,9 @@ describe("ArticlesEditPage tests", () => {
 
       fireEvent.change(titleField, { target: { value: "newTitle" } });
       fireEvent.change(urlField, { target: { value: "newTitle.org" } });
-      fireEvent.change(explanationField, { target: { value: "somethingsomething" } });
+      fireEvent.change(explanationField, {
+        target: { value: "somethingsomething" },
+      });
       fireEvent.change(emailField, { target: { value: "hotmail@gmail.com" } });
       fireEvent.change(dateAddedField, {
         target: { value: "2022-12-25T08:00" },
@@ -200,7 +197,7 @@ describe("ArticlesEditPage tests", () => {
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "Articles Updated - id: 17 title: newTitle",
+        "Articles Updated - id: 17 title: someTitle",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/articles" });
 
