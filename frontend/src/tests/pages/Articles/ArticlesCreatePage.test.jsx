@@ -54,7 +54,9 @@ describe("ArticlesCreatePage tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId("ArticlesForm-title")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("ArticlesForm-title"),
+      ).toBeInTheDocument();
     });
   });
 
@@ -62,7 +64,7 @@ describe("ArticlesCreatePage tests", () => {
     const queryClient = new QueryClient();
     const articles = {
       id: 17,
-      title: "nameTitle",
+      titleField: "nameTitle",
       url: "nameTitle.com",
       explanation: "something",
       email: "email@gmail.com",
@@ -80,7 +82,9 @@ describe("ArticlesCreatePage tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId("ArticlesForm-title")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("ArticlesForm-title"),
+      ).toBeInTheDocument();
     });
 
     const titleField = screen.getByTestId("ArticlesForm-title");
