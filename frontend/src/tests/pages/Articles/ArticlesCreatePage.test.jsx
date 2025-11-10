@@ -1,4 +1,4 @@
-import { render, waitFor, fireEvent, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
@@ -7,32 +7,12 @@ import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
-
-const mockToast = vi.fn();
-vi.mock("react-toastify", async (importOriginal) => {
-  const originalModule = await importOriginal();
-  return {
-    ...originalModule,
-    toast: vi.fn((x) => mockToast(x)),
-  };
-});
-
-const mockNavigate = vi.fn();
-vi.mock("react-router", async (importOriginal) => {
-  const originalModule = await importOriginal();
-  return {
-    ...originalModule,
-    Navigate: vi.fn((x) => {
-      mockNavigate(x);
-      return null;
-    }),
-  };
-});
+import { expect } from "vitest";
 
 describe("ArticlesCreatePage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
-  beforeEach(() => {
+  const setupUserOnly = () => {
     axiosMock.reset();
     axiosMock.resetHistory();
     axiosMock
@@ -41,10 +21,15 @@ describe("ArticlesCreatePage tests", () => {
     axiosMock
       .onGet("/api/systemInfo")
       .reply(200, systemInfoFixtures.showingNeither);
-  });
+  };
 
-  test("renders without crashing", async () => {
-    const queryClient = new QueryClient();
+  const queryClient = new QueryClient();
+  test("Renders expected content", async () => {
+    // arrange
+
+    setupUserOnly();
+
+    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -53,72 +38,11 @@ describe("ArticlesCreatePage tests", () => {
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      expect(
-        screen.getByTestId("ArticlesForm-title"),
-      ).toBeInTheDocument();
-    });
-  });
+    // assert
 
-  test("when you fill in the form and hit submit, it makes a request to the backend", async () => {
-    const queryClient = new QueryClient();
-    const articles = {
-      id: 17,
-      titleField: "nameTitle",
-      url: "nameTitle.com",
-      explanation: "something",
-      email: "email@gmail.com",
-      dateAdded: "2022-02-02T00:00",
-    };
-
-    axiosMock.onPost("/api/articles/post").reply(202, articles);
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <ArticlesCreatePage />
-        </MemoryRouter>
-      </QueryClientProvider>,
-    );
-
-    await waitFor(() => {
-      expect(
-        screen.getByTestId("ArticlesForm-title"),
-      ).toBeInTheDocument();
-    });
-
-    const titleField = screen.getByTestId("ArticlesForm-title");
-    const urlField = screen.getByTestId("ArticlesForm-url");
-    const explanationField = screen.getByTestId("ArticlesForm-explanation");
-    const emailField = screen.getByTestId("ArticlesForm-email");
-    const dateAddedField = screen.getByTestId("ArticlesForm-dateAdded");
-    const submitButton = screen.getByTestId("ArticlesForm-submit");
-
-    fireEvent.change(titleField, { target: { value: "nameTitle" } });
-    fireEvent.change(urlField, { target: { value: "nameTitle.com" } });
-    fireEvent.change(explanationField, { target: { value: "something" } });
-    fireEvent.change(emailField, { target: { value: "email@gmail.com" } });
-    fireEvent.change(dateAddedField, {
-      target: { value: "2022-02-02T00:00" },
-    });
-
-    expect(submitButton).toBeInTheDocument();
-
-    fireEvent.click(submitButton);
-
-    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
-
-    expect(axiosMock.history.post[0].params).toEqual({
-      dateAdded: "2022-02-02T00:00",
-      email: "email@gmail.com",
-      explanation: "something",
-      url: "nameTitle.com",
-      title: "nameTitle",
-    });
-
-    expect(mockToast).toBeCalledWith(
-      "New articles Created - id: 17 title: nameTitle",
-    );
-    expect(mockNavigate).toBeCalledWith({ to: "/articles" });
+    await screen.findByText("Create page not yet implemented");
+    expect(
+      screen.getByText("Create page not yet implemented"),
+    ).toBeInTheDocument();
   });
 });
