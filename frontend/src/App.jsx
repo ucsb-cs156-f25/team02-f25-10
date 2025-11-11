@@ -194,7 +194,7 @@ function App() {
           />
           <Route
             exact
-            path="/artivles/create"
+            path="/articles/create"
             element={<ArticlesCreatePage />}
           />
         </>
