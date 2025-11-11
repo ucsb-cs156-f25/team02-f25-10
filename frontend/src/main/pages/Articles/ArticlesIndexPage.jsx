@@ -1,7 +1,9 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 
+
+// Stryker disable all
 export default function ArticlesIndexPage() {
-  // Stryker disable all : placeholder for future implementation
+  // placeholder for future implementation
   return (
     <BasicLayout>
       <div className="pt-2">
