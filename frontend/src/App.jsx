@@ -3,6 +3,10 @@ import HomePage from "main/pages/HomePage";
 import ProfilePage from "main/pages/ProfilePage";
 import AdminUsersPage from "main/pages/AdminUsersPage";
 
+import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
+import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
+import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
+
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
@@ -128,11 +132,6 @@ function App() {
       )}
       {hasRole(currentUser, "ROLE_USER") && (
         <>
-          <Route exact path="/placeholder" element={<PlaceholderIndexPage />} />
-        </>
-      )}
-      {hasRole(currentUser, "ROLE_USER") && (
-        <>
           <Route
             exact
             path="/menuitemreviews"
@@ -154,6 +153,15 @@ function App() {
           />
         </>
       )}
+       {hasRole(currentUser, "ROLE_USER") && (
+        <>
+          <Route 
+            exact 
+            path="/placeholder" 
+            element={<PlaceholderIndexPage />} 
+          />
+        </>
+      )}
       {hasRole(currentUser, "ROLE_ADMIN") && (
         <>
           <Route
@@ -168,9 +176,36 @@ function App() {
           />
         </>
       )}
+       {hasRole(currentUser, "ROLE_USER") && (
+        <>
+          <Route 
+            exact 
+            path="/articles" 
+            element={<ArticlesIndexPage />} 
+          />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_ADMIN") && (
+        <>
+          <Route
+            exact
+            path="/articles/edit/:id"
+            element={<ArticlesEditPage />}
+          />
+          <Route
+            exact
+            path="/articles/create"
+            element={<ArticlesCreatePage />}
+          />
+        </>
+      )}
       {hasRole(currentUser, "ROLE_USER") && (
         <>
-          <Route exact path="/ucsborganization" element={<UCSBOrganizationIndexPage />} />
+          <Route 
+             exact 
+             path="/ucsborganization" 
+             element={<UCSBOrganizationIndexPage />}
+          />
         </>
       )}
       {hasRole(currentUser, "ROLE_ADMIN") && (
@@ -187,9 +222,13 @@ function App() {
           />
         </>
       )}
+      
       {hasRole(currentUser, "ROLE_USER") && (
         <>
-          <Route exact path="/helprequest" element={<HelpRequestIndexPage />} />
+          <Route 
+            exact 
+            path="/helprequest" 
+            element={<HelpRequestIndexPage />} />
         </>
       )}
       {hasRole(currentUser, "ROLE_ADMIN") && (
