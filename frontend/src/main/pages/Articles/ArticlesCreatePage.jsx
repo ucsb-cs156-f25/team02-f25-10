@@ -18,8 +18,10 @@ export default function ArticlesCreatePage({ storybook = false }) {
   });
 
   const onSuccess = (articles) => {
-    toast(`New articles Created - id: ${articles.id} title: ${articles.title}`);
-  };
+    toast(
+      `New articles Created - id: ${articles.id} title: ${articles.title}`,
+    );
+  }
 
   const mutation = useBackendMutation(
     objectToAxiosParams,
